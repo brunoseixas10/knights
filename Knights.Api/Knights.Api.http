@@ -1,0 +1,6 @@
+@Knights.Api_HostAddress = http://localhost:5201
+
+GET {{Knights.Api_HostAddress}}/knights/
+Accept: application/json
+
+###

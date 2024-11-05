@@ -1,0 +1,29 @@
+services:
+  my-api:
+    image: knights-generator-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+        - ASPNETCORE_URLS=http://+:80;
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ConnectionStrings__DefaultConnection=mongodb://mongodb:27017 
+        - MongoDB__DatabaseName=KnightsDatabase
+        - MongoDB__CollectionName=Knights
+    depends_on:
+      - mongodb
+    networks:
+        - mycustomnetwork
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    networks:
+      - mycustomnetwork
+  
+networks:
+  mycustomnetwork:
+    external: false
+  
